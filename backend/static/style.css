@@ -24,9 +24,35 @@ body.light-theme {
 }
 
 .dashboard-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
     height: 100vh;
 }
+
+.ai-sidebar {
+    background-color: var(--surface-color-dark);
+    padding: 20px;
+    border-left: 1px solid #333;
+}
+
+body.light-theme .ai-sidebar {
+    background-color: var(--surface-color-light);
+    border-left-color: #E0E0E0;
+}
+
+.ai-analysis h3 {
+    margin-top: 0;
+}
+
+#ai-suggestion p {
+    font-style: italic;
+    color: var(--secondary-text-color-dark);
+}
+
+body.light-theme #ai-suggestion p {
+    color: var(--secondary-text-color-light);
+}
+
 
 .sidebar {
     width: 250px;
@@ -74,6 +100,40 @@ body.light-theme .sidebar-nav li a {
 
 body.light-theme .sidebar-nav li a:hover {
     background-color: #E0E0E0;
+}
+
+.user-profile {
+    margin-top: 20px;
+}
+
+.user-profile input {
+    width: calc(100% - 18px);
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: var(--primary-text-color-dark);
+    margin-bottom: 10px;
+}
+
+body.light-theme .user-profile input {
+    background-color: #E0E0E0;
+    color: var(--primary-text-color-light);
+    border-color: #ccc;
+}
+
+.user-profile button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.user-profile button:hover {
+    background-color: #0056b3;
 }
 
 .symbol-selection {

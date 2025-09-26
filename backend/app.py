@@ -1,9 +1,11 @@
-from flask import Flask, jsonify
-from flask_cors import CORS
+from flask import Flask, jsonify, render_template
 import datetime
 
-app = Flask(__name__)
-CORS(app)
+app = Flask(__name__, static_folder='static', template_folder='templates')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 def generate_candlestick_data(start_price, num_days):
     data = []
@@ -18,19 +20,40 @@ def generate_candlestick_data(start_price, num_days):
         price = close_price
     return data
 
-@app.route('/api/data/<symbol>')
+@app.route('/api/data/<path:symbol>')
 def get_data(symbol):
     data = {
-        'EUR-USD': generate_candlestick_data(1.10, 30),
-        'GBP-USD': generate_candlestick_data(1.38, 30),
-        'BTC-USD': generate_candlestick_data(45000, 30),
-        'ETH-USD': generate_candlestick_data(3000, 30),
+        'EUR/USD': generate_candlestick_data(1.10, 30),
+        'GBP/USD': generate_candlestick_data(1.38, 30),
+        'USD/JPY': generate_candlestick_data(110.0, 30),
+        'AUD/USD': generate_candlestick_data(0.75, 30),
+        'USD/CAD': generate_candlestick_data(1.25, 30),
+        'BTC/USD': generate_candlestick_data(45000, 30),
+        'ETH/USD': generate_candlestick_data(3000, 30),
+        'ADA/USD': generate_candlestick_data(2.20, 30),
+        'DOGE/USD': generate_candlestick_data(0.25, 30),
+        'XRP/USD': generate_candlestick_data(1.10, 30),
         'AAPL': generate_candlestick_data(150, 30),
-        'GOOGL': generate_candlestick_data(2800, 30)
+        'GOOGL': generate_candlestick_data(2800, 30),
+        'MSFT': generate_candlestick_data(300, 30),
+        'AMZN': generate_candlestick_data(3400, 30),
+        'TSLA': generate_candlestick_data(750, 30),
     }
-    # Use replace to match the format from the frontend select options
-    symbol_key = symbol.replace('/', '-')
+    symbol_key = symbol.split(' ')[0]
     return jsonify(data.get(symbol_key, []))
 
+@app.route('/api/ai-suggestion/<path:symbol>')
+def get_ai_suggestion(symbol):
+    import random
+    suggestions = [
+        f"Based on recent trends, {symbol} shows strong bullish signals. Consider buying.",
+        f"Market sentiment for {symbol} is currently bearish. It may be wise to sell or hold.",
+        f"Volatility for {symbol} is high. This could be a good opportunity for short-term traders.",
+        f"Our analysis indicates a potential breakout for {symbol}. Keep a close watch.",
+        f"A consolidation phase is expected for {symbol}. Long-term investors might consider this a good entry point."
+    ]
+    suggestion = random.choice(suggestions)
+    return jsonify({'suggestion': suggestion})
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
@@ -19,20 +19,34 @@
                     <li><a href="#" id="theme-toggle">Toggle Theme</a></li>
                 </ul>
             </nav>
+            <div class="user-profile">
+                <h3>User Profile</h3>
+                <input type="text" id="user-name" placeholder="Enter your name">
+                <button id="save-name">Save</button>
+            </div>
             <div class="symbol-selection">
                 <h3>Select Symbol</h3>
                 <select id="symbol-select">
                     <optgroup label="Forex">
                         <option value="EUR/USD">EUR/USD</option>
                         <option value="GBP/USD">GBP/USD</option>
+                        <option value="USD/JPY">USD/JPY</option>
+                        <option value="AUD/USD">AUD/USD</option>
+                        <option value="USD/CAD">USD/CAD</option>
                     </optgroup>
                     <optgroup label="Crypto">
                         <option value="BTC/USD">BTC/USD</option>
                         <option value="ETH/USD">ETH/USD</option>
+                        <option value="ADA/USD">Cardano (ADA)</option>
+                        <option value="DOGE/USD">Dogecoin (DOGE)</option>
+                        <option value="XRP/USD">Ripple (XRP)</option>
                     </optgroup>
                     <optgroup label="Stocks">
-                        <option value="AAPL">AAPL</option>
-                        <option value="GOOGL">GOOGL</option>
+                        <option value="AAPL">Apple (AAPL)</option>
+                        <option value="GOOGL">Alphabet (GOOGL)</option>
+                        <option value="MSFT">Microsoft (MSFT)</option>
+                        <option value="AMZN">Amazon (AMZN)</option>
+                        <option value="TSLA">Tesla (TSLA)</option>
                     </optgroup>
                 </select>
             </div>
@@ -47,7 +61,15 @@
                 </div>
             </div>
         </main>
+        <aside class="ai-sidebar">
+            <div class="ai-analysis">
+                <h3>AI Market Analysis</h3>
+                <div id="ai-suggestion">
+                    <p>Select a symbol to see AI analysis.</p>
+                </div>
+            </div>
+        </aside>
     </div>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
