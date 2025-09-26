@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Test Page</title>
+</head>
+<body>
+    <h1>API Test</h1>
+    <button id="test-button">Fetch AAPL Data</button>
+    <h2>Result:</h2>
+    <pre id="result"></pre>
+
+    <script>
+        document.getElementById('test-button').addEventListener('click', async () => {
+            const resultContainer = document.getElementById('result');
+            resultContainer.textContent = 'Fetching...';
+            try {
+                const response = await fetch('/api/data/AAPL');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                resultContainer.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultContainer.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
