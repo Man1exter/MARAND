@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Settings</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#" id="theme-toggle">Toggle Theme</a></li>
+                </ul>
+            </nav>
+            <div class="symbol-selection">
+                <h3>Select Symbol</h3>
+                <select id="symbol-select">
+                    <optgroup label="Forex">
+                        <option value="EUR/USD">EUR/USD</option>
+                        <option value="GBP/USD">GBP/USD</option>
+                    </optgroup>
+                    <optgroup label="Crypto">
+                        <option value="BTC/USD">BTC/USD</option>
+                        <option value="ETH/USD">ETH/USD</option>
+                    </optgroup>
+                    <optgroup label="Stocks">
+                        <option value="AAPL">AAPL</option>
+                        <option value="GOOGL">GOOGL</option>
+                    </optgroup>
+                </select>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Financial Charts</h1>
+            </header>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div id="chart"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
